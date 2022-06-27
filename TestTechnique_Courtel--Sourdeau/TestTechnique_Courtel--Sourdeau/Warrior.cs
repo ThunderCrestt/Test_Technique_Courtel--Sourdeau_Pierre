@@ -15,7 +15,6 @@ namespace ConsoleApp1
 
         protected bool ignoreNextDamage = false;
 
-
         public Warrior(string String="")
         {
 
@@ -35,19 +34,20 @@ namespace ConsoleApp1
         public virtual Warrior Equip(string objectToEquip)
         {
             Equipment pieceOfEquipment = Equipment.createObject("ConsoleApp1." + objectToEquip, new Object[] { objectToEquip, this });
-            pieceOfEquipment.enter();
+            pieceOfEquipment.onEquip();
             equipments.Add(pieceOfEquipment);
             return this;
         }
+
 
         public void doDamage(Warrior opponent)
         {
             //weapon effect
             useEquipmentInAttack();
-            opponent.receivedDamage(opponent, damage);
+            Console.WriteLine(this.GetType() + " damage");
         }
 
-        public void receivedDamage(Warrior opponent,int damage)
+        public void receivedDamage(int damage)
         {
             //armor effect
             useEquipmentInDefense();

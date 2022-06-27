@@ -8,8 +8,11 @@ namespace ConsoleApp1
 {
     public class Equipment
     {
+        //the name of the equipment
         public string name { get; private set; }
+        //the owner of the equipment
         protected Warrior owner;
+        //if the equipment is active
         protected bool isActive = true;
         public Equipment(string name,Warrior owner)
         {
@@ -22,133 +25,15 @@ namespace ConsoleApp1
                 return (Equipment)instance;
         }
 
-        public virtual void enter() {}
+        public virtual void onEquip() {}
 
         public virtual void doEffect() { }
 
         public virtual void resetEffect() {}
     }
 
-    class Armour : Equipment
-    {
-        public Armour(string name, Warrior owner) : base(name, owner) {}
-    }
+  
 
-    class Weapon : Equipment
-    {
-        protected Warrior opponent;
-        public int damage=0;
-        public Weapon(string name, Warrior owner) : base(name, owner)
-        {
-            this.opponent = owner.opponent;
-        }
-    }
-
-    class buckler : Armour
-    {
-        public int numBlowByAxe = 0;
-        int numBlow = 0;
-        public buckler(string name,Warrior owner) : base(name,owner) {}
-
-        public override void doEffect()
-        {
-            //évite les domages 1 fois sur deux est détruit après 3 coups de haches
-            if(isActive && numBlow%2==0)
-            {
-                Console.WriteLine(numBlow);
-                owner.block();
-                //ignore damage
-            }
-            numBlow++;
-
-        }
-
-        public override void resetEffect()
-        {
-            owner.unBlock();
-        }
-
-        public void takeDamageByAxe()
-        {
-            numBlowByAxe++;
-            if(numBlowByAxe==3)
-            {
-                Console.WriteLine("destroy");
-                isActive = false;
-            }
-        }
-    }
-
-
-    class armor : Armour
-    {
-        public armor(string name, Warrior owner) : base(name, owner)
-        {
-        }
-        public override void doEffect()
-        {
-            base.doEffect();
-            //réduit les dommages reçu de 3 mais inflige 1 dégat de moins
-        }
-
-        public override void enter()
-        {
-            owner.setDamage(owner.damage - 1);
-            owner.setResistance(3);
-        }
-    }
-
-    class axe : Weapon
-    {
-        public axe(string name, Warrior owner) : base(name, owner)
-        {
-            this.damage = 6;
-        }
-        public override void doEffect()
-        {
-            //find armor and increment damage
-            buckler buck = ((buckler)owner.opponent.equipments.Find(equip => equip.name == "buckler"));
-            buck?.takeDamageByAxe();
-        }
-
-        public override void enter()
-        {
-            owner.setDamage(damage);
-        }
-    }
-
-    class sword : Weapon
-    {
-        public sword(string name, Warrior owner) : base(name, owner)
-        {
-            this.damage = 5;
-        }
-        public override void doEffect()
-        {
-        }
-
-        public override void enter()
-        {
-            owner.setDamage(damage);
-        }
-    }
-
-    class greatSword : Weapon
-    {
-        public greatSword(string name, Warrior owner) : base(name, owner)
-        {
-            this.damage = 12;
-        }
-        public override void doEffect()
-        {
-        }
-
-        public override void enter()
-        {
-            owner.setDamage(damage);
-        }
-
-    }
 
 
 }
