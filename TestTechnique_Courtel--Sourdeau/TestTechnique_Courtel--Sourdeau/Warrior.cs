@@ -36,6 +36,7 @@ namespace ConsoleApp1
             this.HP -= damage;
             if(HitPoints()<=0)
             {
+                this.HP = 0;
                 isAlive = false;
             }
         }

@@ -13,7 +13,7 @@ namespace ConsoleApp1
             this.damage = 12;
         }
 
-        public override Warrior Equip(string objectToEquip)
+        public override Highlander Equip(string objectToEquip)
         {
             return this;
 
