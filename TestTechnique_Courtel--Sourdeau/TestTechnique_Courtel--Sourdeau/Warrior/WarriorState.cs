@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    /// <summary>
+    /// the mother class for all warrior states
+    /// </summary>
     public class WarriorState
     {
         public string name { get; private set; }
@@ -15,6 +14,12 @@ namespace ConsoleApp1
             this.name = name;
             this.warrior = warrior;
         }
+        /// <summary>
+        /// create the warrior state in function of the class name and the parameters
+        /// </summary>
+        /// <param name="className"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static WarriorState createWarriorState(string className, object[] parameters)
         {
             //Create the object in function of the string
@@ -28,25 +33,32 @@ namespace ConsoleApp1
                 return null;
             }
         }
-
-        public virtual void doEffect()
+        /// <summary>
+        /// is done at each attack
+        /// </summary>
+        public virtual void doEffectOnAttack()
         {
 
         }
-
-        public virtual void resetEffect()
+        /// <summary>
+        /// is reset at each attack
+        /// </summary>
+        public virtual void resetEffectOnAttack()
         {
 
         }
     }
 
+    /// <summary>
+    /// the vicious state
+    /// </summary>
     class Vicious : WarriorState
     {
         int numOfBlow = 0;
         public Vicious(string name, Warrior warrior) : base(name,warrior)
         { }
 
-        public override void doEffect()
+        public override void doEffectOnAttack()
         {
             //increase damage of this attack and the next one
             if(numOfBlow<2)
@@ -56,7 +68,7 @@ namespace ConsoleApp1
             numOfBlow++;
         }
 
-        public override void resetEffect()
+        public override void resetEffectOnAttack()
         {
             //reset the effect
             if (numOfBlow <= 2)
@@ -66,12 +78,15 @@ namespace ConsoleApp1
         }
     }
 
+    /// <summary>
+    /// the veteran state
+    /// </summary>
     class Veteran : WarriorState
     {
         bool doOnce = true;
         public Veteran(string name, Warrior warrior) : base(name, warrior)
         { }
-        public override void doEffect()
+        public override void doEffectOnAttack()
         {
             //enter in berserk when hp<30% of max hp
             if (doOnce && (warrior.HitPoints()<=(0.3*(float)warrior.maxHP)))

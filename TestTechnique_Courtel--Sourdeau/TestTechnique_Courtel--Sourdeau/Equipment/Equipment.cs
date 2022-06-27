@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    /// <summary>
+    /// the mother class of weapon and armour
+    /// </summary>
     public class Equipment
     {
         //the name of the equipment
@@ -19,6 +22,12 @@ namespace ConsoleApp1
             this.name = name;
             this.owner = owner;
         }
+        /// <summary>
+        /// create the equipment via the className and the parameters
+        /// </summary>
+        /// <param name="className"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static Equipment createEquipment(string className, object[] parameters)
         {
             //Create the object in function of the string

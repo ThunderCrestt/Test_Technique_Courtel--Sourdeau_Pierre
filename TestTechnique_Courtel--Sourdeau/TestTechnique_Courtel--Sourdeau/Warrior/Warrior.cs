@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 namespace ConsoleApp1
 {
+    /// <summary>
+    /// the mother class for all warriors
+    /// </summary>
     public class Warrior
     {
         //The maxHP of the warrior, default 100
@@ -74,11 +77,11 @@ namespace ConsoleApp1
         public void doDamage()
         {
             //weapon effect
-            state?.doEffect();
+            state?.doEffectOnAttack();
             //deals Damage via the weapon, because on of the effect of the weapon is to deal damage
             useEquipmentInAttack();
             resetEquipmentInAttack();
-            state?.resetEffect();
+            state?.resetEffectOnAttack();
         }
 
         /// <summary>

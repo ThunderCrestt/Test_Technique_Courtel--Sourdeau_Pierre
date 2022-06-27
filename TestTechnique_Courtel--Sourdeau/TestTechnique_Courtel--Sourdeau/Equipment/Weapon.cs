@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-
+    /// <summary>
+    /// the mother class of all weapons
+    /// </summary>
     class Weapon : Equipment
     {
         protected Warrior opponent;
@@ -15,9 +17,20 @@ namespace ConsoleApp1
         {
             this.opponent = owner.opponent;
         }
+
+        /// <summary>
+        /// when a weapon is equipped, it changes the damage that the warrior can deal, so the weapons must be equiped first
+        /// </summary>
         public override void onEquip()
         {
-            owner.setDamage(damage);
+            if(owner.equipments.Find(equip => equip.name =="armor")!=null)
+            {
+                owner.setDamage(damage-1);
+
+            } else
+            {
+                owner.setDamage(damage);
+            }
         }
 
         public override void doEffect()
@@ -27,7 +40,9 @@ namespace ConsoleApp1
         }
     }
 
-
+    /// <summary>
+    /// the axe class
+    /// </summary>
     class axe : Weapon
     {
         public axe(string name, Warrior owner) : base(name, owner)
@@ -37,7 +52,7 @@ namespace ConsoleApp1
         }
         public override void doEffect()
         {
-            //find armor and increment damage of the bulck, if it has been hitten 3times, destroy it
+            //find armor and increment damage of the buckler, if it has been hitten 3times, destroy it
             buckler buck = ((buckler)owner.opponent.equipments.Find(equip => equip.name == "buckler"));
             buck?.takeDamageByAxe();
             //the opponent receivedDamage in function of the owner Damage
@@ -47,6 +62,9 @@ namespace ConsoleApp1
 
     }
 
+    /// <summary>
+    /// the sword class
+    /// </summary>
     class sword : Weapon
     {
         public sword(string name, Warrior owner) : base(name, owner)
@@ -57,6 +75,9 @@ namespace ConsoleApp1
 
     }
 
+    /// <summary>
+    /// the greatSword class
+    /// </summary>
     class greatSword : Weapon
     {
         private int numberOfAttacks = 1;

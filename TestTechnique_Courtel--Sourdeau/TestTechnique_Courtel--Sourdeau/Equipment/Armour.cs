@@ -6,17 +6,24 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    //the mother class for all Armours
     class Armour : Equipment
     {
         public Armour(string name, Warrior owner) : base(name, owner) { }
     }
 
+    /// <summary>
+    /// the buckler class
+    /// </summary>
     class buckler : Armour
     {
         public int numBlowByAxe = 0;
         int numBlow = 0;
         public buckler(string name, Warrior owner) : base(name, owner) { }
 
+        /// <summary>
+        /// the effect of the buckler
+        /// </summary>
         public override void doEffect()
         {
             //avoid damage 1/2 of the time
@@ -29,14 +36,20 @@ namespace ConsoleApp1
 
         }
 
+        /// <summary>
+        /// reset the effect of the buckler
+        /// </summary>
         public override void resetEffect()
         {
             owner.unBlock();
         }
 
+        /// <summary>
+        /// damage the buckler, is called if the opponent has an axe
+        /// </summary>
         public void takeDamageByAxe()
         {
-            //the bulcker take damage, an if it has been hitten 3times, set isActive to false
+            //the buckler take damage, an if it has been hitten 3times, set isActive to false
             if (numBlow % 2 == 1)
             {
                 numBlowByAxe++;
@@ -48,7 +61,9 @@ namespace ConsoleApp1
         }
     }
 
-
+    /// <summary>
+    /// the armor class
+    /// </summary>
     class armor : Armour
     {
         public armor(string name, Warrior owner) : base(name, owner)
@@ -59,6 +74,9 @@ namespace ConsoleApp1
             base.doEffect();
         }
 
+        /// <summary>
+        /// affect the warrior when armor is equipped
+        /// </summary>
         public override void onEquip()
         {
             //reduce damage dealt, and damage received
