@@ -33,10 +33,19 @@ namespace ConsoleApp1
 
         }
 
+        /// <summary>
+        /// executed when the object is equipped
+        /// </summary>
         public virtual void onEquip() {}
 
+        /// <summary>
+        /// the effect of the object
+        /// </summary>
         public virtual void doEffect() { }
 
+        /// <summary>
+        /// reset the effect of the object
+        /// </summary>
         public virtual void resetEffect() {}
     }
 

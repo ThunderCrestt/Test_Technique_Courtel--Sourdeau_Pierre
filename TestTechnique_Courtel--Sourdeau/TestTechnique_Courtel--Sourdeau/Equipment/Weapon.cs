@@ -41,7 +41,7 @@ namespace ConsoleApp1
             buckler buck = ((buckler)owner.opponent.equipments.Find(equip => equip.name == "buckler"));
             buck?.takeDamageByAxe();
             //the opponent receivedDamage in function of the owner Damage
-            owner.opponent.receivedDamage(owner.damage);
+            base.doEffect();
         }
 
 
@@ -71,7 +71,7 @@ namespace ConsoleApp1
             //can only attack 2/3 of a time
             if(this.numberOfAttacks%3!=0)
             {
-                owner.opponent.receivedDamage(owner.damage);
+                base.doEffect();
             }
             numberOfAttacks++;
         }

@@ -75,7 +75,9 @@ namespace ConsoleApp1
         {
             //weapon effect
             state?.doEffect();
+            //deals Damage via the weapon, because on of the effect of the weapon is to deal damage
             useEquipmentInAttack();
+            resetEquipmentInAttack();
             state?.resetEffect();
         }
 
@@ -99,6 +101,19 @@ namespace ConsoleApp1
             resetEquipmentInDefense();
         }
 
+        /// <summary>
+        /// reset the equipment a the moment of attack, so only weapons are reset
+        /// </summary>
+        protected void resetEquipmentInAttack()
+        {
+            foreach (Equipment equipment in equipments)
+            {
+                if (equipment is Weapon)
+                {
+                    equipment.resetEffect();
+                }
+            }
+        }
         /// <summary>
         /// use the equipment a the moment of attack, so only weapons are used
         /// </summary>
