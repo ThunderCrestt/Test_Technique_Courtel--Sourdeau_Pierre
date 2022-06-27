@@ -8,7 +8,7 @@ namespace ConsoleApp1
     {
         public Highlander(string stateString = "") : base(stateString)
         {
-            //base hitpoint and damage
+            //base hitpoint and equipment
             this.HP = 150;
             this.maxHP = this.HP;
             this.Equip("greatSword");

@@ -8,7 +8,7 @@ namespace ConsoleApp1
     {
         public Viking(string stateString = "") : base(stateString)
         {
-            //base hitpoint and damage
+            //base hitpoint and equipment
             this.HP = 120;
             this.maxHP = this.HP;
             this.Equip("axe");

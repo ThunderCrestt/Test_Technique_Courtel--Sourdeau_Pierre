@@ -8,8 +8,8 @@ namespace ConsoleApp1
 {
     public class WarriorState
     {
-        public string name;
-        public Warrior warrior;
+        public string name { get; private set; }
+        public Warrior warrior { get; private set; }
         public WarriorState(string name,Warrior warrior)
         {
             this.name = name;
@@ -17,6 +17,7 @@ namespace ConsoleApp1
         }
         public static WarriorState createObject(string className, object[] parameters)
         {
+            //Create the object in function of the string
             var instance = Activator.CreateInstance(Type.GetType(className), parameters);
             return (WarriorState)instance;
         }
@@ -40,20 +41,20 @@ namespace ConsoleApp1
 
         public override void doEffect()
         {
+            //increase damage of this attack and the next one
             if(numOfBlow<2)
             {
                 warrior.setDamage(warrior.damage + 20);
-                Console.WriteLine("poison" + warrior.damage.ToString());
             }
             numOfBlow++;
         }
 
         public override void resetEffect()
         {
+            //reset the effect
             if (numOfBlow <= 2)
             {
                 warrior.setDamage(warrior.damage - 20);
-                Console.WriteLine("reset" + warrior.damage.ToString());
             }
         }
     }
@@ -65,10 +66,9 @@ namespace ConsoleApp1
         { }
         public override void doEffect()
         {
-            Console.WriteLine("HP : "+ warrior.HitPoints());
+            //enter in berserk when hp<30% of max hp
             if (doOnce && (warrior.HitPoints()<=(0.3*(float)warrior.maxHP)))
             {
-                Console.WriteLine("berserk");
                 warrior.setDamage(2 * warrior.damage);
                 doOnce = false;
             }

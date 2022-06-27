@@ -19,7 +19,7 @@ namespace ConsoleApp1
 
         public override void doEffect()
         {
-            //évite les domages 1 fois sur deux est détruit après 3 coups de haches
+            //avoid damage 1/2 of the time
             if (isActive && numBlow % 2 == 0)
             {
                 //ignore damage
@@ -36,6 +36,7 @@ namespace ConsoleApp1
 
         public void takeDamageByAxe()
         {
+            //the bulcker take damage, an if it has been hitten 3times, set isActive to false
             if (numBlow % 2 == 1)
             {
                 numBlowByAxe++;
@@ -60,7 +61,7 @@ namespace ConsoleApp1
 
         public override void onEquip()
         {
-            //réduit les dommages reçu de 3 mais inflige 1 dégat de moins
+            //reduce damage dealt, and damage received
             owner.setDamage(owner.damage - 1);
             owner.setResistance(3);
         }
