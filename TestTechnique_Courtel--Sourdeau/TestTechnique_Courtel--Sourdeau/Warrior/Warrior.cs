@@ -4,7 +4,8 @@ namespace ConsoleApp1
 {
     public class Warrior
     {
-        public int HP { get; protected set; }
+        public int maxHP = 100;
+        public int HP { get; protected set; } = 100;
         public int damage { get; protected set; }
         public bool isAlive { get; private set; } = true;
 
@@ -15,9 +16,13 @@ namespace ConsoleApp1
 
         protected bool ignoreNextDamage = false;
 
-        public Warrior(string String="")
+        protected WarriorState state;
+        public Warrior(string stateString="")
         {
-
+            if(stateString!=string.Empty)
+            {
+                state = WarriorState.createObject("ConsoleApp1." + stateString, new Object[] { stateString, this });
+            }
         }
 
         public virtual void Engage(Warrior opponent)
@@ -43,8 +48,9 @@ namespace ConsoleApp1
         public void doDamage(Warrior opponent)
         {
             //weapon effect
+            state?.doEffect();
             useEquipmentInAttack();
-            Console.WriteLine(this.GetType() + " damage");
+            state?.resetEffect();
         }
 
         public void receivedDamage(int damage)
@@ -60,6 +66,7 @@ namespace ConsoleApp1
                     isAlive = false;
                 }
             }
+            Console.WriteLine(damage - resistance);
             resetEquipmentInDefense();
         }
 

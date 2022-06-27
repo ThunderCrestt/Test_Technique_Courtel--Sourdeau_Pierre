@@ -22,9 +22,8 @@ namespace ConsoleApp1
             //évite les domages 1 fois sur deux est détruit après 3 coups de haches
             if (isActive && numBlow % 2 == 0)
             {
-                Console.WriteLine(owner.GetType() + numBlow.ToString());
-                owner.block();
                 //ignore damage
+                owner.block();
             }
             numBlow++;
 
@@ -42,7 +41,6 @@ namespace ConsoleApp1
                 numBlowByAxe++;
                 if (numBlowByAxe == 3)
                 {
-                    Console.WriteLine(owner.GetType() + " destroy");
                     this.isActive = false;
                 }
             }

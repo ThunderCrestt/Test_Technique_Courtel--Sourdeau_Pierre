@@ -4,21 +4,21 @@ using System.Text;
 
 namespace ConsoleApp1
 {
-    class Highlander : Warrior
+    class Viking : Warrior
     {
-        public Highlander(string String="")
+        public Viking(string stateString = "") : base(stateString)
         {
             //base hitpoint and damage
-            this.HP = 150;
-            this.Equip("greatSword");
+            this.HP = 120;
+            this.maxHP = this.HP;
+            this.Equip("axe");
         }
-        
-        public override Highlander Equip(string objectToEquip)
+
+
+        public override Viking Equip(string objectToEquip)
         {
             base.Equip(objectToEquip);
             return this;
-
         }
-        
     }
 }
