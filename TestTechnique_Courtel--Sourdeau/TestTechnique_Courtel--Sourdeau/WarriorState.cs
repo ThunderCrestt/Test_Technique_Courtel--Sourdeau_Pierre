@@ -18,8 +18,15 @@ namespace ConsoleApp1
         public static WarriorState createObject(string className, object[] parameters)
         {
             //Create the object in function of the string
-            var instance = Activator.CreateInstance(Type.GetType(className), parameters);
-            return (WarriorState)instance;
+            if(className!=string.Empty)
+            {
+                var instance = Activator.CreateInstance(Type.GetType(className), parameters);
+                return (WarriorState)instance;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public virtual void doEffect()

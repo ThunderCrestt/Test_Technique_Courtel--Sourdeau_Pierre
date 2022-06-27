@@ -22,8 +22,15 @@ namespace ConsoleApp1
         public static Equipment createObject(string className, object[] parameters)
         {
             //Create the object in function of the string
+            if(className!=string.Empty)
+            {
                 var instance = Activator.CreateInstance(Type.GetType(className), parameters);
                 return (Equipment)instance;
+            } else
+            {
+                return null;
+            }
+
         }
 
         public virtual void onEquip() {}

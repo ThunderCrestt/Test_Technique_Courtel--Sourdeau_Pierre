@@ -55,12 +55,16 @@ namespace ConsoleApp1
         /// <returns> the instance of the warrior </returns>
         public virtual Warrior Equip(string objectToEquip)
         {
-            Equipment pieceOfEquipment = Equipment.createObject("ConsoleApp1." + objectToEquip, new Object[] { objectToEquip, this });
-            if(pieceOfEquipment!=null)
+            if(objectToEquip!=string.Empty)
             {
-                pieceOfEquipment.onEquip();
-                equipments.Add(pieceOfEquipment);
+                Equipment pieceOfEquipment = Equipment.createObject("ConsoleApp1." + objectToEquip, new Object[] { objectToEquip, this });
+                if (pieceOfEquipment != null)
+                {
+                    pieceOfEquipment.onEquip();
+                    equipments.Add(pieceOfEquipment);
+                }
             }
+
             return this;
         }
 
