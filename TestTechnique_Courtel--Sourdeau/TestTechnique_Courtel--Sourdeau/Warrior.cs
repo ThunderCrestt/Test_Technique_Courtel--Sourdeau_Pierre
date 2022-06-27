@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 namespace ConsoleApp1
 {
     public class Warrior
@@ -7,13 +7,24 @@ namespace ConsoleApp1
         public int HP { get; protected set; }
         public int damage { get; protected set; }
         public bool isAlive { get; private set; } = true;
+
+        public int resistance { get; protected set; } = 0;
+        public Warrior opponent { get; protected set; }
+
+        public List<Equipment> equipments = new List<Equipment>();
+
+        protected bool ignoreNextDamage = false;
+
+
         public Warrior(string String="")
         {
 
         }
 
-        public void Engage(Warrior opponent)
+        public virtual void Engage(Warrior opponent)
         {
+            this.opponent = opponent;
+            this.opponent.opponent = this;
             while(this.isAlive && opponent.isAlive)
             {
                 doDamage(opponent);
@@ -23,27 +34,92 @@ namespace ConsoleApp1
 
         public virtual Warrior Equip(string objectToEquip)
         {
+            Equipment pieceOfEquipment = Equipment.createObject("ConsoleApp1." + objectToEquip, new Object[] { objectToEquip, this });
+            pieceOfEquipment.enter();
+            equipments.Add(pieceOfEquipment);
             return this;
         }
 
-        private void doDamage(Warrior opponent)
+        public void doDamage(Warrior opponent)
         {
+            //weapon effect
+            useEquipmentInAttack();
             opponent.receivedDamage(opponent, damage);
         }
 
         public void receivedDamage(Warrior opponent,int damage)
         {
-            this.HP -= damage;
-            if(HitPoints()<=0)
+            //armor effect
+            useEquipmentInDefense();
+            if (isAlive && !ignoreNextDamage && damage > resistance)
             {
-                this.HP = 0;
-                isAlive = false;
+                this.HP -= (damage - resistance);
+                if (HitPoints() <= 0)
+                {
+                    this.HP = 0;
+                    isAlive = false;
+                }
+            }
+            resetEquipmentInDefense();
+        }
+
+        protected void useEquipmentInAttack()
+        {
+            foreach(Equipment equipment in equipments)
+            {
+                if (equipment is Weapon)
+                {
+                    equipment.doEffect();
+                }
+            }
+        }
+
+        protected void resetEquipmentInDefense()
+        {
+            foreach (Equipment equipment in equipments)
+            {
+                if (equipment is Armour)
+                {
+                    equipment.resetEffect();
+                }
+            }
+        }
+
+        protected void useEquipmentInDefense()
+        {
+            foreach (Equipment equipment in equipments)
+            {
+                if(equipment is Armour)
+                {
+                    equipment.doEffect();
+                }
             }
         }
 
         public int HitPoints()
         {
             return this.HP;
+        }
+
+        public void setDamage(int damage)
+        {
+            this.damage = damage;
+        }
+
+        public void setResistance(int resistance)
+        {
+            this.resistance = resistance;
+        }
+
+        //effect of object 
+        public void block()
+        {
+            ignoreNextDamage = true;
+        }
+
+        public void unBlock()
+        {
+            ignoreNextDamage = false;
         }
     }
 }

@@ -10,11 +10,13 @@ namespace ConsoleApp1
         {
             //base hitpoint and damage
             this.HP = 120;
-            this.damage = 6;
+            this.Equip("axe");
         }
+
 
         public override Viking Equip(string objectToEquip)
         {
+            base.Equip(objectToEquip);
             return this;
         }
     }

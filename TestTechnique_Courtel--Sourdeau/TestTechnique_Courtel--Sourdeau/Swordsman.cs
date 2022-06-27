@@ -10,12 +10,15 @@ namespace ConsoleApp1
         {
             //base hitpoint and damage
             this.HP = 100;
-            this.damage = 5;
+            this.Equip("sword");
         }
 
+        
         public override Swordsman Equip(string objectToEquip)
         {
+            base.Equip(objectToEquip);
             return this;
         }
+        
     }
 }
