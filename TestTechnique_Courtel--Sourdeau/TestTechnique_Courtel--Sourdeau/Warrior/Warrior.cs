@@ -30,7 +30,7 @@ namespace ConsoleApp1
             if(stateString!=string.Empty)
             {
                 //create the warrior state in function of the stateString input
-                state = WarriorState.createObject("ConsoleApp1." + stateString, new Object[] { stateString, this });
+                state = WarriorState.createWarriorState("ConsoleApp1." + stateString, new Object[] { stateString, this });
             }
         }
         /// <summary>
@@ -57,7 +57,7 @@ namespace ConsoleApp1
         {
             if(objectToEquip!=string.Empty)
             {
-                Equipment pieceOfEquipment = Equipment.createObject("ConsoleApp1." + objectToEquip, new Object[] { objectToEquip, this });
+                Equipment pieceOfEquipment = Equipment.createEquipment("ConsoleApp1." + objectToEquip, new Object[] { objectToEquip, this });
                 if (pieceOfEquipment != null)
                 {
                     pieceOfEquipment.onEquip();

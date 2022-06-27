@@ -19,7 +19,7 @@ namespace ConsoleApp1
             this.name = name;
             this.owner = owner;
         }
-        public static Equipment createObject(string className, object[] parameters)
+        public static Equipment createEquipment(string className, object[] parameters)
         {
             //Create the object in function of the string
             if(className!=string.Empty)

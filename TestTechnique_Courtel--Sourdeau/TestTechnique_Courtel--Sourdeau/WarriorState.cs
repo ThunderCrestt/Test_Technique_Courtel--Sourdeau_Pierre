@@ -15,7 +15,7 @@ namespace ConsoleApp1
             this.name = name;
             this.warrior = warrior;
         }
-        public static WarriorState createObject(string className, object[] parameters)
+        public static WarriorState createWarriorState(string className, object[] parameters)
         {
             //Create the object in function of the string
             if(className!=string.Empty)
